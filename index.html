@@ -243,46 +243,6 @@
             <div class="tool-output" id="timezone-output"></div>
           </div>
         </div>
-
-        <!-- Password Generator -->
-        <div class="tool-section" id="tool-password">
-          <div class="tool-header" onclick="toggleTool('password')">
-            <h4>
-              <i class="bi bi-key"></i> Password Gen
-            </h4>
-            <button class="share-btn" onclick="shareToolAlternative('password')" title="Share Password Generator">
-              <i class="bi bi-share"></i>
-            </button>
-            <i class="bi bi-chevron-down" id="password-icon"></i>
-          </div>
-          <div class="tool-content" id="password-content">
-            <input type="number" class="tool-input" id="password-length" placeholder="Length (8-64)" value="16" min="8" max="64" />
-            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
-              <label style="color: var(--text-secondary); font-size: 0.8rem;">
-                <input type="checkbox" id="password-uppercase" checked> Uppercase
-              </label>
-              <label style="color: var(--text-secondary); font-size: 0.8rem;">
-                <input type="checkbox" id="password-lowercase" checked> Lowercase
-              </label>
-              <label style="color: var(--text-secondary); font-size: 0.8rem;">
-                <input type="checkbox" id="password-numbers" checked> Numbers
-              </label>
-              <label style="color: var(--text-secondary); font-size: 0.8rem;">
-                <input type="checkbox" id="password-symbols" checked> Symbols
-              </label>
-            </div>
-            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
-              <button class="tool-button" onclick="performPasswordGeneration()" style="flex: 1;">
-                <i class="bi bi-key"></i>
-                Generate Password
-              </button>
-              <button class="tool-button" onclick="shareToolAlternative('password')" style="flex: 0 0 auto; padding: 0.75rem 1rem;">
-                <i class="bi bi-share"></i>
-              </button>
-            </div>
-            <div class="tool-output" id="password-output"></div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
