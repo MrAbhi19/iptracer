@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IP Tracer - Advanced Network Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <div class="logo">🌐 IP Tracer Pro</div>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="bi bi-moon-stars"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="content-area">
+      <!-- Current IP Card -->
+      <div class="card fade-in">
+        <h2><i class="bi bi-wifi"></i> Your Current IP</h2>
+        <div class="ip-display" id="current-ip">
+          <span>Loading...</span>
+          <button class="copy-btn" onclick="copyToClipboard('current-ip')" title="Copy IP">
+            <i class="bi bi-clipboard"></i>
+          </button>
+        </div>
+        <div id="current-ip-details"></div>
+      </div>
+
+      <!-- IP Search Card -->
+      <div class="card fade-in">
+        <h2><i class="bi bi-search"></i> IP Address Lookup</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+          Enter an IPv4 or IPv6 address to get detailed information about its location and network.
+        </p>
+        <form class="search-form" id="ip-search-form">
+          <input 
+            type="text" 
+            class="search-input" 
+            id="ip-input" 
+            placeholder="e.g., 8.8.8.8, 2001:4860:4860::8888"
+            autocomplete="off"
+          />
+          <button type="submit" class="search-button">
+            <i class="bi bi-search"></i>
+            Lookup
+          </button>
+        </form>
+        <div id="search-results"></div>
+      </div>
+    </div>
+
+    <!-- Tools Panel -->
+    <div class="tools-panel slide-in">
+      <h3><i class="bi bi-tools"></i> Network Tools</h3>
+      
+      <div class="tools-container">
+        <!-- DNS Lookup -->
+        <div class="tool-section" id="tool-dns">
+          <div class="tool-header" onclick="toggleTool('dns')">
+            <h4>
+              <i class="bi bi-globe"></i> DNS Lookup
+            </h4>
+            <button class="share-btn" onclick="shareToolAlternative('dns')" title="Share DNS Lookup">
+              <i class="bi bi-share"></i>
+            </button>
+            <i class="bi bi-chevron-down" id="dns-icon"></i>
+          </div>
+          <div class="tool-content" id="dns-content">
+            <input type="text" class="tool-input" id="dns-input" placeholder="example.com" />
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <button class="tool-button" onclick="performDNSLookup()" style="flex: 1;">
+                <i class="bi bi-search"></i>
+                Lookup DNS
+              </button>
+            </div>
+            <div class="tool-output" id="dns-output"></div>
+          </div>
+        </div>
+
+        <!-- IP Range Calculator -->
+        <div class="tool-section" id="tool-ipcalc">
+          <div class="tool-header" onclick="toggleTool('ipcalc')">
+            <h4>
+              <i class="bi bi-calculator"></i> IP Calculator
+            </h4>
+            <button class="share-btn" onclick="shareToolAlternative('ipcalc')" title="Share IP Calculator">
+              <i class="bi bi-share"></i>
+            </button>
+            <i class="bi bi-chevron-down" id="ipcalc-icon"></i>
+          </div>
+          <div class="tool-content" id="ipcalc-content">
+            <input type="text" class="tool-input" id="ipcalc-input" placeholder="192.168.1.0/24" />
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <button class="tool-button" onclick="performIPCalculation()" style="flex: 1;">
+                <i class="bi bi-calculator"></i>
+                Calculate
+              </button>
+            </div>
+            <div class="tool-output" id="ipcalc-output"></div>
+          </div>
+        </div>
+
+        <!-- MAC Address Lookup -->
+        <div class="tool-section" id="tool-mac">
+          <div class="tool-header" onclick="toggleTool('mac')">
+            <h4>
+              <i class="bi bi-device-hdd"></i> MAC Lookup
+            </h4>
+            <button class="share-btn" onclick="shareToolAlternative('mac')" title="Share MAC Lookup">
+              <i class="bi bi-share"></i>
+            </button>
+            <i class="bi bi-chevron-down" id="mac-icon"></i>
+          </div>
+          <div class="tool-content" id="mac-content">
+            <input type="text" class="tool-input" id="mac-input" placeholder="00:11:22:33:44:55" />
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <button class="tool-button" onclick="performMACLookup()" style="flex: 1;">
+                <i class="bi bi-search"></i>
+                Lookup MAC
+              </button>
+            </div>
+            <div class="tool-output" id="mac-output"></div>
+          </div>
+        </div>
+
+        <!-- URL Parser -->
+        <div class="tool-section" id="tool-urlparser">
+          <div class="tool-header" onclick="toggleTool('urlparser')">
+            <h4>
+              <i class="bi bi-link-45deg"></i> URL Parser
+            </h4>
+            <button class="share-btn" onclick="shareToolAlternative('urlparser')" title="Share URL Parser">
+              <i class="bi bi-share"></i>
+            </button>
+            <i class="bi bi-chevron-down" id="urlparser-icon"></i>
+          </div>
+          <div class="tool-content" id="urlparser-content">
+            <input type="text" class="tool-input" id="urlparser-input" placeholder="https://example.com/path?param=value#fragment" />
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <button class="tool-button" onclick="performURLParsing()" style="flex: 1;">
+                <i class="bi bi-link-45deg"></i>
+                Parse URL
+              </button>
+            </div>
+            <div class="tool-output" id="urlparser-output"></div>
+          </div>
+        </div>
+
+        <!-- Base64 Encoder/Decoder -->
+        <div class="tool-section" id="tool-base64">
+          <div class="tool-header" onclick="toggleTool('base64')">
+            <h4>
+              <i class="bi bi-code-square"></i> Base64 Tool
+            </h4>
+            <button class="share-btn" onclick="shareToolAlternative('base64')" title="Share Base64 Tool">
+              <i class="bi bi-share"></i>
+            </button>
+            <i class="bi bi-chevron-down" id="base64-icon"></i>
+          </div>
+          <div class="tool-content" id="base64-content">
+            <input type="text" class="tool-input" id="base64-input" placeholder="Enter text to encode/decode" />
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <button class="tool-button" onclick="performBase64Encode()" style="flex: 1;">
+                <i class="bi bi-arrow-down"></i>
+                Encode
+              </button>
+              <button class="tool-button" onclick="performBase64Decode()" style="flex: 1;">
+                <i class="bi bi-arrow-up"></i>
+                Decode
+              </button>
+            </div>
+            <div class="tool-output" id="base64-output"></div>
+          </div>
+        </div>
+
+        <!-- Hash Generator -->
+        <div class="tool-section" id="tool-hash">
+          <div class="tool-header" onclick="toggleTool('hash')">
+            <h4>
+              <i class="bi bi-hash"></i> Hash Generator
+            </h4>
+            <button class="share-btn" onclick="shareToolAlternative('hash')" title="Share Hash Generator">
+              <i class="bi bi-share"></i>
+            </button>
+            <i class="bi bi-chevron-down" id="hash-icon"></i>
+          </div>
+          <div class="tool-content" id="hash-content">
+            <input type="text" class="tool-input" id="hash-input" placeholder="Enter text to hash" />
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <button class="tool-button" onclick="performHashGeneration()" style="flex: 1;">
+                <i class="bi bi-hash"></i>
+                Generate Hashes
+              </button>
+            </div>
+            <div class="tool-output" id="hash-output"></div>
+          </div>
+        </div>
+
+        <!-- Time Zone Converter -->
+        <div class="tool-section" id="tool-timezone">
+          <div class="tool-header" onclick="toggleTool('timezone')">
+            <h4>
+              <i class="bi bi-clock"></i> Time Zone
+            </h4>
+            <button class="share-btn" onclick="shareToolAlternative('timezone')" title="Share Time Zone Converter">
+              <i class="bi bi-share"></i>
+            </button>
+            <i class="bi bi-chevron-down" id="timezone-icon"></i>
+          </div>
+          <div class="tool-content" id="timezone-content">
+            <select class="tool-input" id="timezone-from">
+              <option value="UTC">UTC</option>
+              <option value="America/New_York">Eastern Time</option>
+              <option value="America/Chicago">Central Time</option>
+              <option value="America/Denver">Mountain Time</option>
+              <option value="America/Los_Angeles">Pacific Time</option>
+              <option value="Europe/London">London</option>
+              <option value="Europe/Paris">Paris</option>
+              <option value="Asia/Tokyo">Tokyo</option>
+            </select>
+            <select class="tool-input" id="timezone-to">
+              <option value="UTC">UTC</option>
+              <option value="America/New_York">Eastern Time</option>
+              <option value="America/Chicago">Central Time</option>
+              <option value="America/Denver">Mountain Time</option>
+              <option value="America/Los_Angeles">Pacific Time</option>
+              <option value="Europe/London">London</option>
+              <option value="Europe/Paris">Paris</option>
+              <option value="Asia/Tokyo">Tokyo</option>
+            </select>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <button class="tool-button" onclick="performTimeZoneConversion()" style="flex: 1;">
+                <i class="bi bi-clock"></i>
+                Convert Time
+              </button>
+            </div>
+            <div class="tool-output" id="timezone-output"></div>
+          </div>
+        </div>
+
+        <!-- Password Generator -->
+        <div class="tool-section" id="tool-password">
+          <div class="tool-header" onclick="toggleTool('password')">
+            <h4>
+              <i class="bi bi-key"></i> Password Gen
+            </h4>
+            <button class="share-btn" onclick="shareToolAlternative('password')" title="Share Password Generator">
+              <i class="bi bi-share"></i>
+            </button>
+            <i class="bi bi-chevron-down" id="password-icon"></i>
+          </div>
+          <div class="tool-content" id="password-content">
+            <input type="number" class="tool-input" id="password-length" placeholder="Length (8-64)" value="16" min="8" max="64" />
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <label style="color: var(--text-secondary); font-size: 0.8rem;">
+                <input type="checkbox" id="password-uppercase" checked> Uppercase
+              </label>
+              <label style="color: var(--text-secondary); font-size: 0.8rem;">
+                <input type="checkbox" id="password-lowercase" checked> Lowercase
+              </label>
+              <label style="color: var(--text-secondary); font-size: 0.8rem;">
+                <input type="checkbox" id="password-numbers" checked> Numbers
+              </label>
+              <label style="color: var(--text-secondary); font-size: 0.8rem;">
+                <input type="checkbox" id="password-symbols" checked> Symbols
+              </label>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <button class="tool-button" onclick="performPasswordGeneration()" style="flex: 1;">
+                <i class="bi bi-key"></i>
+                Generate Password
+              </button>
+              <button class="tool-button" onclick="shareToolAlternative('password')" style="flex: 0 0 auto; padding: 0.75rem 1rem;">
+                <i class="bi bi-share"></i>
+              </button>
+            </div>
+            <div class="tool-output" id="password-output"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
