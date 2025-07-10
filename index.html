@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IP Tracer - Advanced Network Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <div class="logo">🌐 IP Tracer Pro</div>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="bi bi-moon-stars"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="content-area">
+      <!-- Current IP Card -->
+      <div class="card fade-in">
+        <h2><i class="bi bi-wifi"></i> Your Current IP</h2>
+        <div class="ip-display" id="current-ip">
+          <span>Loading...</span>
+          <button class="copy-btn" onclick="copyToClipboard('current-ip')" title="Copy IP">
+            <i class="bi bi-clipboard"></i>
+          </button>
+        </div>
+        <div id="current-ip-details"></div>
+      </div>
+
+      <!-- IP Search Card -->
+      <div class="card fade-in">
+        <h2><i class="bi bi-search"></i> IP Address Lookup</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+          Enter an IPv4 or IPv6 address to get detailed information about its location and network.
+        </p>
+        <form class="search-form" id="ip-search-form">
+          <input 
+            type="text" 
+            class="search-input" 
+            id="ip-input" 
+            placeholder="e.g., 8.8.8.8, 2001:4860:4860::8888"
+            autocomplete="off"
+          />
+          <button type="submit" class="search-button">
+            <i class="bi bi-search"></i>
+            Lookup
+          </button>
+        </form>
+        <div id="search-results"></div>
+      </div>
+    </div>
+
+    <!-- Educational Content -->
+    <section class="info-section">
+      <h2>How IP Geolocation Works</h2>
+      <p>
+        IP geolocation uses your device's public IP address to estimate your physical location. This is done by referencing large databases that map IP address ranges to geographic regions, based on information from ISPs, network infrastructure, and user-contributed data. While generally accurate at the city or region level, it may not pinpoint your exact address and can be affected by VPNs, proxies, or mobile networks.
+      </p>
+    </section>
+    <section class="info-section">
+      <h2>Use Cases for IP Lookup</h2>
+      <ul>
+        <li><strong>Privacy Checks:</strong> See what information your IP reveals about your location.</li>
+        <li><strong>Network Diagnostics:</strong> Troubleshoot connectivity or routing issues.</li>
+        <li><strong>Website Localization:</strong> Understand how sites adapt content based on your region.</li>
+        <li><strong>Security:</strong> Detect suspicious logins or access attempts from unknown locations.</li>
+        <li><strong>Parental Controls:</strong> Monitor or restrict access based on location.</li>
+      </ul>
+    </section>
+    <section class="info-section">
+      <h2>Frequently Asked Questions (FAQs)</h2>
+      <h3>How accurate is IP geolocation?</h3>
+      <p>Accuracy varies by provider and region. City-level accuracy is common, but exact addresses are rarely possible. VPNs and proxies can obscure your real location.</p>
+      <h3>Is my privacy protected?</h3>
+      <p>This tool does not store your IP or location data. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+      <h3>Can I use this for IPv6 addresses?</h3>
+      <p>Yes! The lookup supports both IPv4 and IPv6 addresses.</p>
+      <h3>Why does my location look wrong?</h3>
+      <p>IP databases are not perfect and may be outdated. Mobile networks, VPNs, or corporate networks can also affect accuracy.</p>
+    </section>
+
+    <!-- AdSense-compliant ad placeholder -->
+    <div class="ad-placeholder" style="margin:2rem 0; padding:1rem; background:#222228; border-radius:8px; text-align:center; color:var(--text-secondary);">
+      [Ad space: Your ad could appear here, surrounded by educational content.]
+    </div>
+
+    <!-- Blog/Guides Section -->
+    <section class="blog-section">
+      <h2>Blog & Guides</h2>
+      <div class="blog-list">
+        <article class="blog-preview">
+          <h3><a href="blog1.html">Understanding IP Addresses: IPv4 vs IPv6</a></h3>
+          <p>Learn the differences between IPv4 and IPv6, why the world is moving to IPv6, and what it means for your privacy and connectivity.</p>
+        </article>
+        <article class="blog-preview">
+          <h3><a href="blog2.html">How Accurate is IP Geolocation?</a></h3>
+          <p>Explore the factors that affect IP geolocation accuracy, and how you can improve your online privacy.</p>
+        </article>
+        <article class="blog-preview">
+          <h3><a href="blog3.html">Tips for Protecting Your Online Privacy</a></h3>
+          <p>Simple steps you can take to keep your IP address and personal information safe while browsing the web.</p>
+        </article>
+        <article class="blog-preview">
+          <h3><a href="blog4.html">What is a VPN and How Does it Work?</a></h3>
+          <p>Discover how VPNs protect your privacy, how they work, and when you should use one.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-footer" style="margin-top:3rem; padding:2rem 0 1rem 0; text-align:center; color:var(--text-secondary); font-size:1rem;">
+      <a href="about.html">About</a> &middot; <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a>
+      <div style="margin-top:0.5rem; font-size:0.9rem;">&copy; 2024 IP Tracer Pro</div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
